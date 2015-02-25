@@ -80,13 +80,21 @@ var work = {
 var projects = {
     "projects": {
         "projects": [
-        ]
-
+            {
+                "title": "Automation project",
+                "dates": "2014-",
+                "description": "Selenium automation in python using DWR.",
+                "images": [""],
+            },
+            {
+                "title": "Simple XDDC downloader (Xchat plugin)",
+                "dates": "2013",
+                "description": "Download xddctransfers using Xchat IRC client automatically.",
+                "images": [""],
+            }
+        ],
+        display: function() {
+            return;
+        }
     }
 }
-projects: array of objects with
-                  title: string
-                  dates: string (works with a hyphen between them)
-                  description: string
-                  images: array with string urls
-            display: function taking no parameters
