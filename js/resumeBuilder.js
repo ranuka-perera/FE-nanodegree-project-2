@@ -15,8 +15,21 @@ var bio = {
         "Thinking in Python",
         "Being unsuccesful in humor"],
     "biopic": "http://pix.sawrc.com/83a953b.png",
-    "display": function () {
-        var x = 0;
+    display: function () {
+        "use strict";
+        $("#header").prepend(HTMLheaderRole.replace("%data%", this.role));
+        $("#header").prepend(HTMLheaderName.replace("%data%", this.name));
+        $("#topContacts").append(HTMLmobile.replace("%data%", this.contacts.mobile));
+        $("#topContacts").append(HTMLemail.replace("%data%", this.contacts.email));
+        $("#topContacts").append(HTMLgithub.replace("%data%", this.contacts.github));
+        $("#topContacts").append(HTMLtwitter.replace("%data%", this.contacts.twitter));
+        $("#topContacts").append(HTMLlocation.replace("%data%", this.contacts.location));
+        $("#header").append(HTMLbioPic.replace("%data%", this.biopic));
+        $("#header").append(HTMLWelcomeMsg.replace("%data%", this.welcomeMessage));
+        $("#header").append(HTMLskillsStart);
+        this.skills.forEach(function (skill) {
+            $("#skills").append(HTMLskills.replace("%data%", skill));
+        });
     }
 };
 
@@ -53,7 +66,7 @@ var education = {
             "url": "http://udacity.com"
         }
     ],
-    "display": function () {
+    display: function () {
         var x = 0;
     }
 };
@@ -62,14 +75,30 @@ var work = {
     "jobs": [
         {
             "employer": "Virtusa",
-            "title": "Engineer- Technology",
+            "title": "Engineer (Technology)",
             "location": "Sri Lanka",
-            "dates": "2014-",
+            "dates": "2014 - Present",
             "description": "Worked as Automation Engineer in the Veraxxx Project"
+        },
+        {
+            "employer": "Self",
+            "title": "Student",
+            "location": "Home",
+            "dates": "Birth - 2012",
+            "description": "Stayed as a student."
         }
     ],
-    "display": function () {
-        var x = 0;
+    display: function () {
+        "use strict";
+        this.jobs.forEach(function (job) {
+            var wxp = $("#workExperience").append(HTMLworkStart);
+            var work_el = wxp.find(".work-entry:last");
+            work_el.append(
+                HTMLworkEmployer.replace("%data%", job.employer) + HTMLworkTitle.replace("%data%", job.title));
+            work_el.append(HTMLworkDates.replace("%data%", job.dates));
+            work_el.append(HTMLworkLocation.replace("%data%", job.location));
+            work_el.append(HTMLworkDescription.replace("%data%", job.description));
+        });
     }
 };
 
@@ -90,20 +119,9 @@ var projects = {
     ],
     display: function () {
         var x = 0;
-
+    }
 };
-//bio.bio.display();
-$("#header").prepend(HTMLheaderRole.replace("%data%", bio.role));
-$("#header").prepend(HTMLheaderName.replace("%data%", bio.name));
-$("#topContacts").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
-$("#topContacts").append(HTMLemail.replace("%data%", bio.contacts.email));
-$("#topContacts").append(HTMLgithub.replace("%data%", bio.contacts.github));
-$("#topContacts").append(HTMLtwitter.replace("%data%", bio.contacts.twitter));
-$("#topContacts").append(HTMLlocation.replace("%data%", bio.contacts.location));
-$("#topContacts").append(HTMLbioPic.replace("%data%", bio.biopic));
-$("#topContacts").append(HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage));
-$("#topContacts").append(HTMLskillsStart);
-bio.skills.forEach(function (skill) {
-    $("#skills").append(HTMLskills.replace("%data%", skill));
-});
+bio.display();
+work.display();
+
 
