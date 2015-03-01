@@ -6,29 +6,37 @@ var bio = {
         "email": "ranukaxxx@gmail.com",
         "github": "ranuka-perera",
         "twitter": "N/A",
-        "location": "Sri Lanka"
+        "location": "Ja-Ela, Sri Lanka"
     },
     "welcomeMessage": "Welcome to my humble &lt;redacted&gt; portfolio page...",
     "skills": [
         "Clicking",
         "Doubleclicking",
         "Thinking in Python",
-        "Being unsuccesful in humor"],
+        "Being unsuccessful in humor"],
     "biopic": "http://pix.sawrc.com/83a953b.png",
     display: function () {
         "use strict";
-        $("#header").prepend(HTMLheaderRole.replace("%data%", this.role));
-        $("#header").prepend(HTMLheaderName.replace("%data%", this.name));
-        $("#topContacts").append(HTMLmobile.replace("%data%", this.contacts.mobile));
-        $("#topContacts").append(HTMLemail.replace("%data%", this.contacts.email));
-        $("#topContacts").append(HTMLgithub.replace("%data%", this.contacts.github));
-        $("#topContacts").append(HTMLtwitter.replace("%data%", this.contacts.twitter));
-        $("#topContacts").append(HTMLlocation.replace("%data%", this.contacts.location));
-        $("#header").append(HTMLbioPic.replace("%data%", this.biopic));
-        $("#header").append(HTMLWelcomeMsg.replace("%data%", this.welcomeMessage));
-        $("#header").append(HTMLskillsStart);
+        var header = $("#header");
+        header.prepend(HTMLheaderRole.replace("%data%", this.role));
+        header.prepend(HTMLheaderName.replace("%data%", this.name));
+        var contact_ar = [];
+        contact_ar.push(HTMLmobile.replace("%data%", this.contacts.mobile));
+        contact_ar.push(HTMLemail.replace("%data%", this.contacts.email));
+        contact_ar.push(HTMLgithub.replace("%data%", this.contacts.github));
+        contact_ar.push(HTMLtwitter.replace("%data%", this.contacts.twitter));
+        contact_ar.push(HTMLlocation.replace("%data%", this.contacts.location));
+        contact_ar.forEach(function (item) {
+            $("#topContacts").append(item);
+        });
+        header.append(HTMLbioPic.replace("%data%", this.biopic));
+        header.append(HTMLWelcomeMsg.replace("%data%", this.welcomeMessage));
+        header.append(HTMLskillsStart);
         this.skills.forEach(function (skill) {
             $("#skills").append(HTMLskills.replace("%data%", skill));
+        });
+        contact_ar.forEach(function (item) {
+            $("#footerContacts").append(item);
         });
     }
 };
@@ -37,14 +45,14 @@ var education = {
     "schools": [
         {
             "name": "Australian College of Business and Technology",
-            "location": "Colombo, Sri Lanka",
+            "location": "Colombo 03, Sri Lanka",
             "degree": "Bachelor's Degree",
             "majors": "Software Engineering & Computer Science",
             "dates": "2013",
             "url": "http://acbt.lk"
         },
         {
-            "name": "St. Jospeh's College",
+            "name": "St. Joseph's College",
             "location": "Colombo 10, Sri Lanka",
             "degree": "High School",
             "majors": "N/A",
@@ -67,7 +75,28 @@ var education = {
         }
     ],
     display: function () {
-        var x = 0;
+        "use strict";
+        var eduHolder = $("#education");
+        this.schools.forEach(function (school) {
+            eduHolder.append(HTMLschoolStart);
+            var schoolContainer = eduHolder.find(".education-entry:last");
+            schoolContainer.append(
+                HTMLschoolName.replace("%data%", school.name).replace("#", school.url) +
+                HTMLschoolDegree.replace("%data%", school.degree));
+            schoolContainer.append(HTMLschoolDates.replace("%data%", school.dates));
+            schoolContainer.append(HTMLschoolLocation.replace("%data%", school.location));
+            schoolContainer.append(HTMLschoolMajor.replace("%data%", school.majors));
+        });
+        eduHolder.append(HTMLonlineClasses);
+        this.onlineCourses.forEach(function (course) {
+            eduHolder.append(HTMLschoolStart);
+            var eduEntry = eduHolder.find(".education-entry:last");
+            eduEntry.append(HTMLonlineTitle.replace("%data%", course.title) +
+                            HTMLonlineSchool.replace("%data%", course.school));
+            eduEntry.append(HTMLonlineDates.replace("%data%", course.date));
+            eduEntry.append(HTMLonlineURL.replace("%data%", course.url).replace("#", course.url));
+
+        });
     }
 };
 
@@ -76,16 +105,9 @@ var work = {
         {
             "employer": "Virtusa",
             "title": "Engineer (Technology)",
-            "location": "Sri Lanka",
+            "location": "Colombo 09, Sri Lanka",
             "dates": "2014 - Present",
             "description": "Worked as Automation Engineer in the Veraxxx Project"
-        },
-        {
-            "employer": "Self",
-            "title": "Student",
-            "location": "Home",
-            "dates": "Birth - 2012",
-            "description": "Stayed as a student."
         }
     ],
     display: function () {
@@ -108,20 +130,39 @@ var projects = {
             "title": "Automation project",
             "dates": "2014-",
             "description": "Selenium automation in python using DWR.",
-            "images": [""]
+            "images": [
+                "http://www.seleniumhq.org/images/big-logo.png"
+            ]
         },
         {
             "title": "Simple XDDC downloader (Xchat plugin)",
             "dates": "2013",
             "description": "Download xddctransfers using Xchat IRC client automatically.",
-            "images": [""]
+            "images": [
+                "http://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Hexchat_Logo.svg/120px-Hexchat_Logo.svg.png"
+            ]
         }
     ],
     display: function () {
-        var x = 0;
+        "use strict";
+        this.projects.forEach(function (project) {
+            var projects_holder = $("#projects").append(HTMLprojectStart);
+            var project_container = projects_holder.find(".project-entry:last");
+            project_container.append(HTMLprojectTitle.replace("%data%", project.title));
+            project_container.append(HTMLprojectDates.replace("%data%", project.dates));
+            project_container.append(HTMLprojectDescription.replace("%data%", project.description));
+            project.images.forEach(function (image) {
+                project_container.append(HTMLprojectImage.replace("%data%", image));
+            });
+
+
+        });
     }
 };
 bio.display();
 work.display();
+projects.display();
+education.display();
+$("#mapDiv").append(googleMap);
 
 
