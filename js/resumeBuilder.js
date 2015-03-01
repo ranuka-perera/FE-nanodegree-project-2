@@ -2,13 +2,13 @@ var bio = {
     "name": "Ranuka Perera",
     "role": "Web Developer",
     "contacts": {
-        "mobile": "77-xxxx-x92",
-        "email": "ranukaxxx@gmail.com",
+        "mobile": "01-00100-101",
+        "email": "ranuka*@gmail.com",
         "github": "ranuka-perera",
         "twitter": "N/A",
         "location": "Ja-Ela, Sri Lanka"
     },
-    "welcomeMessage": "Welcome to my humble &lt;redacted&gt; portfolio page...",
+    "welcomeMessage": "Welcome to my humble &lt;redacted&gt; portfolio page.",
     "skills": [
         "Clicking",
         "Doubleclicking",
@@ -137,9 +137,10 @@ var projects = {
         {
             "title": "Simple XDDC downloader (Xchat plugin)",
             "dates": "2013",
-            "description": "Download xddctransfers using Xchat IRC client automatically.",
+            "description": "Download xddc transfers using Xchat IRC client automatically.",
             "images": [
-                "http://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Hexchat_Logo.svg/120px-Hexchat_Logo.svg.png"
+                "http://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Hexchat_Logo.svg/120px-Hexchat_Logo.svg.png",
+                "https://realpython.com/images/python-powered.png"
             ]
         }
     ],
@@ -159,10 +160,13 @@ var projects = {
         });
     }
 };
+function displayMap () {
+    $("#mapDiv").append(googleMap);
+}
 bio.display();
 work.display();
 projects.display();
 education.display();
-$("#mapDiv").append(googleMap);
+displayMap();
 
 
