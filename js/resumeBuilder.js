@@ -13,7 +13,9 @@ var bio = {
         "Clicking",
         "Doubleclicking",
         "Thinking in Python",
-        "Being unsuccessful in humor"],
+        "Being unsuccessful in humor",
+        "Commiting with the wrong Github acount"
+    ],
     "biopic": "http://pix.sawrc.com/83a953b.png",
     display: function () {
         "use strict";
